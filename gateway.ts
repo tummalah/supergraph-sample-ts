@@ -1,13 +1,15 @@
 import {ApolloGateway,IntrospectAndCompose} from "@apollo/gateway";
 import {ApolloServer} from "apollo-server";
+const springbootDGS= [
+  // for subgraphs in springboot 
+  { name: 'employees', url: 'http://localhost:8080/graphql' },
+{ name: 'departments', url: 'http://localhost:8081/graphql' },
+{name:"projects", url: 'http://localhost:8082/graphql'}
+  // ...additional subgraphs...
+];
 const gateway = new ApolloGateway({
     supergraphSdl: new IntrospectAndCompose({
-      subgraphs: [
-        { name: 'employees', url: 'http://localhost:4001' },
-        { name: 'departments', url: 'http://localhost:4002' },
-        {name:"projects", url: 'http://localhost:4003'}
-        // ...additional subgraphs...
-      ],
+      subgraphs: springbootDGS,
     }),
   });
 
